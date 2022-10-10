@@ -8,8 +8,9 @@ class PostService {
         return this.postModel.find().exec();
     }
 
-    public async findOne(id: string): Promise<Post> {
-        return this.postModel.findOne({ _id: id }).exec();
+    public async findOne(id: any): Promise<Post> {
+        const post : any = await this.postModel.find({ _id: id }).exec();
+        return post;
     }
 
     public async create(title: string, body: string): Promise<Post> {
@@ -18,13 +19,14 @@ class PostService {
         return post;
     }
 
-    // public async update(id: string, post: Post): Promise<Post> {
-    //     return this.postModel.findByIdAndUpdate(id, post).exec();
-    // }
+    public async update(id: string, title:string, body:string): Promise<Post> {
+        const updatedPost : any= await this.postModel.findByIdAndUpdate(id, {title,body}, {new: true});
+        return updatedPost;
+    }
 
-    // public async delete(id: string): Promise<Post> {
-    //     return this.postModel.findByIdAndDelete(id).exec();
-    // }
+    public  delete(id: string): void{
+        this.postModel.findByIdAndDelete(id).exec();
+    }
 }
 
 export default PostService;

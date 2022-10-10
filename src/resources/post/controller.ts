@@ -19,8 +19,8 @@ class PostController implements Controller {
         this.router.get(this.path,  this.getPosts);
         this.router.get(`${this.path}/:id`, this.getPost);
         this.router.post(this.path, validationMiddleware(validate.create), this.create);
-        // this.router.put(`${this.path}/:id`, validationMiddleware(validate.updatePost), this.updatePost);
-        // this.router.delete(`${this.path}/:id`, this.deletePost);
+        this.router.put(`${this.path}/:id`, validationMiddleware(validate.update), this.update);
+        this.router.delete(`${this.path}/:id`, this.delete);
     }
 
     private create = async (request: Request, response: Response, next: NextFunction) => {
@@ -45,6 +45,25 @@ class PostController implements Controller {
             const {id} =  request.params
             const posts = await this.PostService.findOne(id);
             response.send(posts);
+        } catch (error :any) {
+            next(new HttpException(500, error));
+        }
+    }
+    private update = async (request: Request, response: Response, next: NextFunction) => {
+        try {
+            const {id} =  request.params
+            const {title,body} = request.body;
+            const updatedPost = await this.PostService.update(id,title,body);
+            response.send(updatedPost);
+        } catch (error :any) {
+            next(new HttpException(500, error));
+        }
+    }
+    private delete = async (request: Request, response: Response, next: NextFunction) => {
+        try {
+            const {id} =  request.params
+            this.PostService.delete(id);
+            response.send({success: true, message: 'Post deleted successfully'});
         } catch (error :any) {
             next(new HttpException(500, error));
         }

@@ -5,5 +5,9 @@ import joi from 'joi';
     body: joi.string().required(),
 });
 
+const update = joi.object({
+    title: joi.string(),
+    body: joi.string(),
+});
 
-export default { create };
+export default { create, update };
