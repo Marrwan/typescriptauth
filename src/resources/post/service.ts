@@ -8,9 +8,9 @@ class PostService {
         return this.postModel.find().exec();
     }
 
-    // public async findOne(id: string): Promise<Post> {
-    //     return this.postModel.findOne({ _id: id }).exec();
-    // }
+    public async findOne(id: string): Promise<Post> {
+        return this.postModel.findOne({ _id: id }).exec();
+    }
 
     public async create(title: string, body: string): Promise<Post> {
         const post = await this.postModel.create({ title, body });
