@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import Controller from '@/utils/interfaces/controller';
-import errorMiddleware from '@/middleware/error';
+import Controller from './utils/interfaces/controller';
+import errorMiddleware from './middleware/error';
 import compression from 'compression';
 
 class App {
@@ -49,3 +49,5 @@ class App {
         });
     }
 }
+
+export default App;
