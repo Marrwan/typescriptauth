@@ -29,4 +29,4 @@ class PostService {
     }
 }
 
-export default PostService;
+export default PostService; 
