@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import Controller from './utils/interfaces/controller';
 import errorMiddleware from './middleware/error';
 import compression from 'compression';
+import cookie from 'cookie';
 
 class App {
     public express: Application;
