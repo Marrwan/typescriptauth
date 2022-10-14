@@ -1,8 +1,7 @@
 import userModel from './model';
-import User from './interface';
 import token from '../../utils/token';
 import passwordValidator from 'password-validator';
-import { response } from 'express';
+
 
 class UserService {
 public  userModel = userModel;
